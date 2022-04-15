@@ -27,7 +27,7 @@
         <maven-checkstyle-plugin.version>3.1.2</maven-checkstyle-plugin.version>
         <checkstyle.version>8.42</checkstyle.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
-        <commons-api.version>1.0.0</commons-api.version>
+        <example-commons-api.version>1.0.0</example-commons-api.version>
         <javafaker.version>1.0.2</javafaker.version>
         <sonar.coverage.exclusions>
             **/TemplateApiApplication.java,
@@ -99,8 +99,8 @@
         </dependency>
         <dependency>
             <groupId>com.example</groupId>
-            <artifactId>commons-api</artifactId>
-            <version>${commons-api.version}</version>
+            <artifactId>example-commons-api</artifactId>
+            <version>${example-commons-api.version}</version>
         </dependency>
 
         <!-- Tests dependencies -->
