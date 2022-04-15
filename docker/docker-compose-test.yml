@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:10.4
+    environment:
+      POSTGRES_DB: template-api
+      POSTGRES_USER: template-api
+      POSTGRES_PASSWORD: template-api
+    ports:
+      - 5433:5432

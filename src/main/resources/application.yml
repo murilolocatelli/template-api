@@ -1,0 +1,51 @@
+application:
+  env: ${APPLICATION_ENV}
+  name: '@pom.artifactId@'
+  description: '@pom.description@'
+  version: '@pom.version@'
+
+server:
+  port: ${SERVER_PORT}
+  shutdown: graceful
+
+management:
+  endpoint:
+    health:
+      show-details: always
+      group:
+        readiness:
+          include: readinessState,db
+  health:
+    probes:
+      enabled: true
+
+spring:
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    hikari:
+      minimumIdle: ${SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE}
+      maximumPoolSize: ${SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE}
+
+  jpa:
+    show-sql: ${SPRING_JPA_SHOW_SQL}
+    hibernate:
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO}
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL95Dialect
+        jdbc:
+          lob:
+            non_contextual_creation: true
+
+  security:
+    user:
+      name: ${SPRING_SECURITY_USER_NAME}
+      password: ${SPRING_SECURITY_USER_PASSWORD}
+
+  jackson:
+    default-property-inclusion: non_null
+    deserialization:
+      adjust-dates-to-context-time-zone: false
