@@ -16,6 +16,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private static final String[] PERMITED_MATCHERS =
         {"/v2/api-docs", "/swagger-resources/**", "/swagger-ui/**", "/actuator/health/**"};
 
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http
