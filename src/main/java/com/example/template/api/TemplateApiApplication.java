@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TemplateApiApplication /*extends SwaggerConfiguration*/ {
 
     static final String BASE_APPLICATION_PACKAGE = "com.example";
-    //private static final String BASE_CONTROLLER_PACKAGE = "com.example.template.api.v1.controller";
+    //private static final String BASE_CONTROLLER_PACKAGE = "com.example.template.api.controller";
 
     public static void main(String[] args) {
         SpringApplication.run(TemplateApiApplication.class, args);

@@ -37,7 +37,7 @@ import org.springframework.web.context.WebApplicationContext;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = TemplateApiApplication.class)
 @Transactional
-public class UserControllerTest {
+class UserControllerTest {
 
     private static final String PATH_USER_CONTROLLER = "/template-api/v1/user";
 
@@ -55,14 +55,14 @@ public class UserControllerTest {
     private User userInitial;
 
     @BeforeEach
-    public void before() {
+    void before() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
         this.userInitial = this.userRepository.save(this.userInitial());
     }
 
     @Test
-    public void getUser() throws Exception {
+    void getUser() throws Exception {
         MockHttpServletRequestBuilder requestBuilder =
             get(PATH_USER_CONTROLLER).contentType(MediaType.APPLICATION_JSON_VALUE);
 
@@ -85,7 +85,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void getUserFilterByName() throws Exception {
+    void getUserFilterByName() throws Exception {
         User userNew = this.userRepository.save(this.userNew());
 
         MockHttpServletRequestBuilder requestBuilder =
@@ -108,7 +108,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void getUserFilterByNameNotFound() throws Exception {
+    void getUserFilterByNameNotFound() throws Exception {
         MockHttpServletRequestBuilder requestBuilder =
             get(PATH_USER_CONTROLLER)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -121,7 +121,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void getUserPageable() throws Exception {
+    void getUserPageable() throws Exception {
         this.userRepository.save(this.userInitial());
         this.userRepository.save(this.userInitial());
 
@@ -143,7 +143,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void getUserPageableOutOfRange() throws Exception {
+    void getUserPageableOutOfRange() throws Exception {
         MockHttpServletRequestBuilder requestBuilder =
             get(PATH_USER_CONTROLLER)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -157,7 +157,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void getUserPageableInvalidOffset() throws Exception {
+    void getUserPageableInvalidOffset() throws Exception {
         MockHttpServletRequestBuilder requestBuilder =
             get(PATH_USER_CONTROLLER)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -171,7 +171,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void getUserPageableInvalidLimit() throws Exception {
+    void getUserPageableInvalidLimit() throws Exception {
         MockHttpServletRequestBuilder requestBuilder =
             get(PATH_USER_CONTROLLER)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -185,7 +185,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void postUser() throws Exception {
+    void postUser() throws Exception {
         User userCreated = this.userNew();
 
         MockHttpServletRequestBuilder requestBuilder =
@@ -208,7 +208,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void postUserAlreadyExists() throws Exception {
+    void postUserAlreadyExists() throws Exception {
         User userCreated = this.userInitial;
 
         ObjectNode userCreatedJson = jsonService.toObjectNode(userCreated);
@@ -227,7 +227,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void postUserMissingBody() throws Exception {
+    void postUserMissingBody() throws Exception {
         MockHttpServletRequestBuilder requestBuilder =
             post(PATH_USER_CONTROLLER)
                 .contentType(MediaType.APPLICATION_JSON_VALUE);
@@ -239,7 +239,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void postUserMissingName() throws Exception {
+    void postUserMissingName() throws Exception {
         User userCreated = this.userNew();
 
         ObjectNode userCreatedJson = jsonService.toObjectNode(userCreated);
@@ -257,7 +257,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void postUserMissingActive() throws Exception {
+    void postUserMissingActive() throws Exception {
         User userCreated = this.userNew();
 
         ObjectNode userCreatedJson = jsonService.toObjectNode(userCreated);
@@ -275,7 +275,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void postUserInvalidActive() throws Exception {
+    void postUserInvalidActive() throws Exception {
         User userCreated = this.userNew();
 
         ObjectNode userCreatedJson = jsonService.toObjectNode(userCreated);
@@ -293,7 +293,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void postUserInvalidAge() throws Exception {
+    void postUserInvalidAge() throws Exception {
         User userCreated = this.userNew();
 
         ObjectNode userCreatedJson = jsonService.toObjectNode(userCreated);
@@ -311,7 +311,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void postUserInvalidHeight() throws Exception {
+    void postUserInvalidHeight() throws Exception {
         User userCreated = this.userNew();
 
         ObjectNode userCreatedJson = jsonService.toObjectNode(userCreated);
@@ -329,7 +329,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void postUserInvalidDate() throws Exception {
+    void postUserInvalidDate() throws Exception {
         User userCreated = this.userNew();
 
         ObjectNode userCreatedJson = jsonService.toObjectNode(userCreated);
@@ -347,7 +347,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void postUserInvalidDateTime() throws Exception {
+    void postUserInvalidDateTime() throws Exception {
         User userCreated = this.userNew();
 
         ObjectNode userCreatedJson = jsonService.toObjectNode(userCreated);
@@ -365,7 +365,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void getUserById() throws Exception {
+    void getUserById() throws Exception {
         MockHttpServletRequestBuilder requestBuilder =
             get(PATH_USER_CONTROLLER + "/{0}", this.userInitial.getId())
                 .contentType(MediaType.APPLICATION_JSON_VALUE);
@@ -389,7 +389,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void getUserByIdNotFound() throws Exception {
+    void getUserByIdNotFound() throws Exception {
         MockHttpServletRequestBuilder requestBuilder =
             get(PATH_USER_CONTROLLER + "/{0}", "123")
                 .contentType(MediaType.APPLICATION_JSON_VALUE);
@@ -401,7 +401,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void getUserByIdInvalidId() throws Exception {
+    void getUserByIdInvalidId() throws Exception {
         MockHttpServletRequestBuilder requestBuilder =
             get(PATH_USER_CONTROLLER + "/{0}", "abc")
                 .contentType(MediaType.APPLICATION_JSON_VALUE);
@@ -413,7 +413,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void putUser() throws Exception {
+    void putUser() throws Exception {
         User userUpdated = this.userNew();
 
         MockHttpServletRequestBuilder requestBuilder =
@@ -436,7 +436,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void putUserNotFound() throws Exception {
+    void putUserNotFound() throws Exception {
         User userUpdated = this.userNew();
 
         MockHttpServletRequestBuilder requestBuilder =
@@ -451,7 +451,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void putUserInvalidId() throws Exception {
+    void putUserInvalidId() throws Exception {
         MockHttpServletRequestBuilder requestBuilder =
             put(PATH_USER_CONTROLLER + "/{0}", "abc")
                 .contentType(MediaType.APPLICATION_JSON_VALUE);
@@ -463,7 +463,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void putUserMissingName() throws Exception {
+    void putUserMissingName() throws Exception {
         User userUpdated = this.userNew();
 
         ObjectNode userUpdatedJson = jsonService.toObjectNode(userUpdated);
@@ -481,7 +481,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void putUserMissingActive() throws Exception {
+    void putUserMissingActive() throws Exception {
         User userUpdated = this.userNew();
 
         ObjectNode userUpdatedJson = jsonService.toObjectNode(userUpdated);
@@ -499,7 +499,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void putUserInvalidActive() throws Exception {
+    void putUserInvalidActive() throws Exception {
         User userUpdated = this.userNew();
 
         ObjectNode userUpdatedJson = jsonService.toObjectNode(userUpdated);
@@ -517,7 +517,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void putUserInvalidAge() throws Exception {
+    void putUserInvalidAge() throws Exception {
         User userUpdated = this.userNew();
 
         ObjectNode userUpdatedJson = jsonService.toObjectNode(userUpdated);
@@ -535,7 +535,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void putUserInvalidHeight() throws Exception {
+    void putUserInvalidHeight() throws Exception {
         User userUpdated = this.userNew();
 
         ObjectNode userUpdatedJson = jsonService.toObjectNode(userUpdated);
@@ -553,7 +553,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void putUserInvalidDate() throws Exception {
+    void putUserInvalidDate() throws Exception {
         User userUpdated = this.userNew();
 
         ObjectNode userUpdatedJson = jsonService.toObjectNode(userUpdated);
@@ -571,7 +571,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void putUserInvalidDateTime() throws Exception {
+    void putUserInvalidDateTime() throws Exception {
         User userUpdated = this.userNew();
 
         ObjectNode userUpdatedJson = jsonService.toObjectNode(userUpdated);
@@ -589,7 +589,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void deleteUser() throws Exception {
+    void deleteUser() throws Exception {
         MockHttpServletRequestBuilder requestBuilder =
             delete(PATH_USER_CONTROLLER + "/{0}", this.userInitial.getId())
                 .contentType(MediaType.APPLICATION_JSON_VALUE);
@@ -600,7 +600,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void deleteUserNotFound() throws Exception {
+    void deleteUserNotFound() throws Exception {
         MockHttpServletRequestBuilder requestBuilder =
             delete(PATH_USER_CONTROLLER + "/{0}", "123")
                 .contentType(MediaType.APPLICATION_JSON_VALUE);
@@ -612,7 +612,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void deleteUserInvalidId() throws Exception {
+    void deleteUserInvalidId() throws Exception {
         MockHttpServletRequestBuilder requestBuilder =
             delete(PATH_USER_CONTROLLER + "/{0}", "abc")
                 .contentType(MediaType.APPLICATION_JSON_VALUE);
